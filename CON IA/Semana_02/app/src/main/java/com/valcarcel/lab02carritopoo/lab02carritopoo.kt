@@ -35,11 +35,42 @@ class ProductoDigital(
 ) : ProductoBase(nombre, precioBase, cantidad, TipoProducto.DIGITAL) {
     override fun calcularPrecioFinal(): Double = getPrecioBase() - descuentoDigital
 }
+
+class CarritoManager(private val cliente: String) {
+    private val productos = mutableListOf<ProductoBase>()
+
+    fun agregarProducto(producto: ProductoBase) {
+        productos.add(producto)
+        println("Producto agregado: ${producto.getNombre()}")
+    }
+
+    fun obtenerProductos(): List<ProductoBase> = productos
+
+    fun calcularSubtotal(): Double {
+        var subtotal = 0.0
+        for (p in productos) {
+            subtotal += p.calcularSubtotalProducto()
+        }
+        return subtotal
+    }
+
+    fun calcularIGV(subtotal: Double): Double = subtotal * 0.18
+    fun calcularTotal(subtotal: Double, igv: Double): Double = subtotal + igv
+
+    fun calcularDescuento(total: Double): Double {
+        return when {
+            total > 5000 -> total * 0.10
+            total > 3000 -> total * 0.05
+            else -> 0.0
+        }
+    }
+}
+
 fun main() {
     println("=========================================")
     println("      CARRITO DE COMPRAS - TIENDA TECSUP ")
     println("=========================================")
-    println("Cliente: David Valcarcel")
-    val p1: ProductoBase = ProductoFisico("Laptop HP", 2500.0, 1)
-    println("Producto cargado: ${p1.getNombre()} (S/ ${p1.calcularPrecioFinal()})")
+    val manager = CarritoManager("David Valcarcel")
+    manager.agregarProducto(ProductoFisico("Laptop HP", 2500.0, 1))
+    println("Subtotal actual: S/ ${manager.calcularSubtotal()}")
 }
