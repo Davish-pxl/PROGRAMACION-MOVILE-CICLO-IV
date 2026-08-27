@@ -48,6 +48,27 @@ fun main() {
         val totalConDescuento = total - descuento
         println(String.format("%-22s: S/ %8.2f", "Total de Descuento", totalConDescuento))
     }
+    println()
+    println("=== RETO===")
+
+    val productoBuscado = buscarProducto(carrito, "Mouse Logitech")
+    if (productoBuscado != null) {
+        println("Producto encontrado: ${productoBuscado.nombre} (Precio: S/ ${productoBuscado.precio})")
+    } else {
+        println("Producto no encontrado")
+    }
+
+    val eliminado = eliminarProducto(carrito, "Audifonos Sony")
+    if (eliminado) {
+        println("\n--- ACTUALIZACION ---")
+        mostrarDetalle(carrito)
+
+        val nuevoSubtotal = calcularSubtotal(carrito)
+        val nuevoIgv = calcularIGV(nuevoSubtotal)
+        val nuevoTotal = calcularTotal(nuevoSubtotal, nuevoIgv)
+
+        println(String.format("%-22s: S/ %8.2f", "Nuevo total a pagar", nuevoTotal))
+    }
 }
 fun mostrarDetalle(productos: List<Producto>) {
     println("--------- DETALLE DEL CARRITO ---------")
@@ -80,4 +101,29 @@ fun calcularDescuento(total: Double): Double {
         total > 3000 -> total * 0.05
         else -> 0.0
     }
+}
+
+fun buscarProducto(productos: List<Producto>, nombreBuscar: String): Producto? {
+    for (p in productos) {
+        if (p.nombre == nombreBuscar) {
+            return p
+        }
+    }
+    return null
+}
+
+fun eliminarProducto(productos: MutableList<Producto>, nombreEliminar: String): Boolean {
+    var encontrado: Producto? = null
+    for (p in productos) {
+        if (p.nombre == nombreEliminar) {
+            encontrado = p
+            break
+        }
+    }
+
+    if (encontrado != null) {
+        productos.remove(encontrado)
+        return true
+    }
+    return false
 }
