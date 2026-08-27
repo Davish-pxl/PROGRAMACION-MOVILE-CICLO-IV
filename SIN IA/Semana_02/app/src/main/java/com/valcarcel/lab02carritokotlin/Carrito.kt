@@ -69,6 +69,8 @@ fun main() {
 
         println(String.format("%-22s: S/ %8.2f", "Nuevo total a pagar", nuevoTotal))
     }
+    println()
+    println("Gracias por su compra, $nombreCliente!")
 }
 fun mostrarDetalle(productos: List<Producto>) {
     println("--------- DETALLE DEL CARRITO ---------")
