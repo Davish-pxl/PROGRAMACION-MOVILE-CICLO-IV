@@ -26,3 +26,4 @@ Kotlin generará un error de compilación (`Val cannot be reassigned`), ya que l
 <img width="1215" height="597" alt="Captura de pantalla 2026-08-26 190958" src="https://github.com/user-attachments/assets/5c2466d7-8fc4-4077-a3d7-539b3f2aa81c" />
 <img width="612" height="540" alt="Captura de pantalla 2026-08-26 190758" src="https://github.com/user-attachments/assets/f895fc59-e0ef-4cb3-9967-35a526798106" />
 <img width="612" height="790" alt="Captura de pantalla 2026-08-26 192012" src="https://github.com/user-attachments/assets/bc4a62e7-c936-4e64-82b8-c3eae50a09f7" />
+<img width="621" height="823" alt="Captura de pantalla 2026-08-26 204657" src="https://github.com/user-attachments/assets/6c7f50ff-db47-487f-baa7-550cbe104ac7" />
