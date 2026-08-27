@@ -37,6 +37,7 @@ class ProductoDigital(
 }
 
 class CarritoManager(private val cliente: String) {
+    fun estaVacio(): Boolean = productos.isEmpty()
     private val productos = mutableListOf<ProductoBase>()
 
     fun agregarProducto(producto: ProductoBase) {
