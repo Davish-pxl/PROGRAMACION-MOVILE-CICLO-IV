@@ -77,3 +77,41 @@ fun convertirTextoAEntero(texto: String): Int {
     }
     return resultado
 }
+fun obtenerTarifaBase(tipo: String): Double {
+    return when (tipo.lowercase()) {
+        "moto" -> 2.0
+        "auto" -> 4.0
+        "camioneta" -> 10.0
+        else -> 0.0
+    }
+}
+
+fun calcularSubtotalVehiculo(vehiculo: Vehiculo): Double {
+    val tarifaBase = obtenerTarifaBase(vehiculo.tipo)
+    var acumulado = 0.0
+
+    for (hora in 1..vehiculo.horas) {
+        val porcentajeRecargo = when {
+            hora <= 2 -> 0.0
+            hora in 3..5 -> 0.20
+            else -> 0.50
+        }
+
+        val importeHora = tarifaBase * (1.0 + porcentajeRecargo)
+        acumulado = acumulado + importeHora
+    }
+
+    return acumulado
+}
+
+fun calcularDescuentoFrecuente(subtotal: Double, esFrecuente: Boolean): Double {
+    if (esFrecuente) {
+        return subtotal * 0.10
+    } else {
+        return 0.0
+    }
+}
+
+fun calcularTotalVehiculo(subtotal: Double, descuento: Double): Double {
+    return subtotal - descuento
+}
