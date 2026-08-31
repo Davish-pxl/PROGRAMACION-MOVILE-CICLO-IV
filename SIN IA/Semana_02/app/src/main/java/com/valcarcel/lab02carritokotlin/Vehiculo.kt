@@ -1,5 +1,4 @@
 package com.valcarcel.lab02carritokotlin
-
 data class Vehiculo(
     val placa: String,
     val tipo: String,
@@ -10,7 +9,6 @@ data class Vehiculo(
     var descuento: Double = 0.0,
     var totalPagar: Double = 0.0
 )
-
 fun main() {
     println("=== SISTEMA DE CONTROL DE ESTACIONAMIENTO ===")
     print("¿Cuántos vehículos desea procesar?: ")
@@ -41,7 +39,6 @@ fun main() {
                     println("¡Error! Ningún vehículo puede registrar menos de 1 hora. Intente nuevamente.")
                 }
             }
-
             print("Ingrese Nombre del Cliente: ")
             val cliente = readLine() ?: ""
 
@@ -57,13 +54,38 @@ fun main() {
             }
 
             val vehiculo = Vehiculo(placa, tipo, horasEstacionado, cliente, esFrecuente)
+
+            val subtotalCalculado = calcularSubtotalVehiculo(vehiculo)
+            val descuentoCalculado = calcularDescuentoFrecuente(subtotalCalculado, vehiculo.esFrecuente)
+            val totalCalculado = calcularTotalVehiculo(subtotalCalculado, descuentoCalculado)
+
+            vehiculo.subtotal = subtotalCalculado
+            vehiculo.descuento = descuentoCalculado
+            vehiculo.totalPagar = totalCalculado
+
             historialVehiculos.add(vehiculo)
+            mostrarTicket(vehiculo)
 
             contadorVehiculos = contadorVehiculos + 1
         }
+        println("\n========================================")
+        println("          RESUMEN GENERAL DEL DÍA       ")
+        println("========================================")
+        println("Total Vehículos Procesados : ${historialVehiculos.size}")
+        println("  - Motos      : ${contarPorTipo(historialVehiculos, "Moto")}")
+        println("  - Autos      : ${contarPorTipo(historialVehiculos, "Auto")}")
+        println("  - Camionetas : ${contarPorTipo(historialVehiculos, "Camioneta")}")
+        println(String.format("\nRecaudación Total: S/ %.2f", calcularRecaudacionTotal(historialVehiculos)))
+
+        val vehiculoMayor = buscarVehiculoMayorPago(historialVehiculos)
+        if (vehiculoMayor != null) {
+            println("\nVehículo con Mayor Pago:")
+            println("  - Placa : ${vehiculoMayor.placa} (${vehiculoMayor.tipo})")
+            println(String.format("  - Monto : S/ %.2f", vehiculoMayor.totalPagar))
+        }
+        println("========================================")
     }
 }
-
 fun convertirTextoAEntero(texto: String): Int {
     var resultado = 0
     var indice = 0
@@ -77,6 +99,7 @@ fun convertirTextoAEntero(texto: String): Int {
     }
     return resultado
 }
+
 fun obtenerTarifaBase(tipo: String): Double {
     return when (tipo.lowercase()) {
         "moto" -> 2.0
@@ -103,7 +126,6 @@ fun calcularSubtotalVehiculo(vehiculo: Vehiculo): Double {
 
     return acumulado
 }
-
 fun calcularDescuentoFrecuente(subtotal: Double, esFrecuente: Boolean): Double {
     if (esFrecuente) {
         return subtotal * 0.10
@@ -115,6 +137,7 @@ fun calcularDescuentoFrecuente(subtotal: Double, esFrecuente: Boolean): Double {
 fun calcularTotalVehiculo(subtotal: Double, descuento: Double): Double {
     return subtotal - descuento
 }
+
 fun mostrarTicket(vehiculo: Vehiculo) {
     val tarifaBase = obtenerTarifaBase(vehiculo.tipo)
 
