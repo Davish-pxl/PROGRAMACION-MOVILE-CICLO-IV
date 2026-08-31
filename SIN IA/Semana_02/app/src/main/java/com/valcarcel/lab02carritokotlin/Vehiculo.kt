@@ -115,3 +115,69 @@ fun calcularDescuentoFrecuente(subtotal: Double, esFrecuente: Boolean): Double {
 fun calcularTotalVehiculo(subtotal: Double, descuento: Double): Double {
     return subtotal - descuento
 }
+fun mostrarTicket(vehiculo: Vehiculo) {
+    val tarifaBase = obtenerTarifaBase(vehiculo.tipo)
+
+    println("\n----------------------------------------")
+    println("          TICKET DE ESTACIONAMIENTO     ")
+    println("----------------------------------------")
+    println("Placa   : ${vehiculo.placa}")
+    println("Tipo    : ${vehiculo.tipo}")
+    println("Horas   : ${vehiculo.horas}")
+    println("Cliente : ${vehiculo.cliente}")
+    println(String.format("TARIFA BÁSICA: S/ %.2f", tarifaBase))
+    println("----------------------------------------")
+    println(String.format("%-6s %-8s %-10s %-8s", "HORA", "TARIFA", "RECARGO", "IMPORTE"))
+
+    for (hora in 1..vehiculo.horas) {
+        val porcentajeRecargo = when {
+            hora <= 2 -> 0.0
+            hora in 3..5 -> 0.20
+            else -> 0.50
+        }
+
+        val importeHora = tarifaBase * (1.0 + porcentajeRecargo)
+        val recargoTexto = "${(porcentajeRecargo * 100).toInt()}%"
+
+        println(String.format("%-6d %-8.2f %-10s %-8.2f", hora, tarifaBase, recargoTexto, importeHora))
+    }
+
+    println("----------------------------------------")
+    if (vehiculo.esFrecuente) {
+        println(String.format("Subtotal   : S/ %.2f", vehiculo.subtotal))
+        println(String.format("Desc. (10%%): -S/ %.2f", vehiculo.descuento))
+    }
+    println(String.format("TOTAL A PAGAR: S/ %.2f", vehiculo.totalPagar))
+    println("----------------------------------------")
+}
+
+fun contarPorTipo(listaVehiculos: List<Vehiculo>, tipoBuscar: String): Int {
+    var contador = 0
+    for (vehiculo in listaVehiculos) {
+        if (vehiculo.tipo.lowercase() == tipoBuscar.lowercase()) {
+            contador = contador + 1
+        }
+    }
+    return contador
+}
+
+fun calcularRecaudacionTotal(listaVehiculos: List<Vehiculo>): Double {
+    var total = 0.0
+    for (vehiculo in listaVehiculos) {
+        total = total + vehiculo.totalPagar
+    }
+    return total
+}
+
+fun buscarVehiculoMayorPago(listaVehiculos: List<Vehiculo>): Vehiculo? {
+    if (listaVehiculos.size == 0) {
+        return null
+    }
+    var mayor = listaVehiculos[0]
+    for (vehiculo in listaVehiculos) {
+        if (vehiculo.totalPagar > mayor.totalPagar) {
+            mayor = vehiculo
+        }
+    }
+    return mayor
+}
