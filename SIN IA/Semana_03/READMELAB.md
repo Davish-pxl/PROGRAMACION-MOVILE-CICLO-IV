@@ -1,22 +1,5 @@
-# Laboratorio 03: Registro de Producto
+## Mejora con IA (Rama mejora-ia)
 
-**Curso:** Programación Móvil
-
-## Descripción
-Aplicación en Android Studio desarrollada con Jetpack Compose para el registro de productos. Implementa estados (`remember` y `mutableStateOf`), componentes de Material Design 3 (OutlinedTextField, Button, Card) y formateo de moneda.
-
-## Capturas de Pantalla
-
-### 1. Pantalla Inicial (Vacía)
-![Pantalla Vacía](pantalla_vacia.png)
-
-### 2. Producto Registrado
-![Producto Registrado](producto_registrado.png)
-
----
-
-## Pregunta de Reflexión
-**¿Qué pasaría si declaras las variables de los campos SIN `remember`?**
-
-**Respuesta:**
-Si declaramos las variables de estado únicamente con `mutableStateOf("")` sin envolverlas en `remember`, el estado perdería su valor en cada recomposición del composable, ya que cada vez que el usuario ingresa un carácter en un campo de texto, Jetpack Compose dispara una recomposición que reinicializaría la variable nuevamente a una cadena vacía `""`, provocando que el texto ingresado desaparezca al instante y la interfaz sea incapaz de conservar o procesar los datos introducidos.
+| Prompt que usé | Qué generó Gemini | Qué acepté o corregí (y por qué) |
+| :--- | :--- | :--- |
+| *"Actúa como un desarrollador Android Senior. En la función Composable `PantallaRegistro` de `MainActivity.kt`, implementa la lógica de validación de entradas. Si el usuario intenta agregar un producto y alguno de los campos (`nombre`, `precio` o `cantidad`) está vacío (`isBlank()`), evita la renderización de la `Card` de resumen y despliega un mensaje de error en color rojo (`Color.Red`). Asimismo, añade un botón con estilo `OutlinedButton` para el reseteo de estados que limpie los inputs, oculte la tarjeta y reinicie los mensajes. Conserva intacta la arquitectura UI y el diseño previo."* | Generó el estado `mensajeError`, la lógica de validación con `isBlank()` dentro de la lambda del botón principal y el componente `OutlinedButton` para el reseteo de estados de los inputs y la visibilidad de la `Card`. | **Acepté:** La estructura de la variable de estado `mensajeError` y la condicional de validación utilizando `isBlank()`.<br><br>**Corregí:** Reemplacé el texto de error por una instrucción más clara hacia la UX ("Por favor, completa todos los campos requeridos."), apliqué color semántico de error al botón de limpieza y añadí `FontWeight.Bold` al texto de alerta para mejorar el peso visual y la accesibilidad. |
