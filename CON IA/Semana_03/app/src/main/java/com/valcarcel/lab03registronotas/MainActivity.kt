@@ -20,6 +20,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -153,7 +155,7 @@ fun PantallaRegistroNotas() {
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
-            onClick = { },
+            onClick = { mostrarResultado = true },
             enabled = confirmado,
             modifier = Modifier
                 .fillMaxWidth()
@@ -185,6 +187,64 @@ fun PantallaRegistroNotas() {
                 promFinalDouble >= 10.0 -> Triple("EN RECUPERACIÓN", Color(0xFFE65100), Color(0xFFFFF3E0))
                 else -> Triple("DESAPROBADO", Color(0xFFC62828), Color(0xFFFFEBEE))
             }
+
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = Color.White)
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(
+                        text = "Promedio ponderado:  " + String.format("%.2f", promPonderado),
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    Row(verticalAlignment = Alignment.Bottom) {
+                        Text(
+                            text = "Promedio final:  ",
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                            color = Color(0xFF5E43A5)
+                        )
+                        Text(
+                            text = if (redondear) "${promFinalDouble.toInt()}" else String.format("%.2f", promFinalDouble),
+                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                            color = Color(0xFF5E43A5)
+                        )
+                    }
+
+                    if (redondear) {
+                        Text(
+                            text = "(redondeado)",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = Color.Gray
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Surface(
+                        color = colorChipFondo,
+                        shape = RoundedCornerShape(16.dp)
+                    ) {
+                        Text(
+                            text = observacion,
+                            color = colorChipTexto,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp)
+                        )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Text(
+                text = "✓ Promedio calculado correctamente",
+                color = Color(0xFF2E7D32),
+                fontWeight = FontWeight.Medium,
+                style = MaterialTheme.typography.bodyMedium
+            )
         }
     }
 }
