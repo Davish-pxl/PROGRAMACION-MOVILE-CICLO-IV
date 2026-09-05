@@ -98,7 +98,7 @@ fun PantallaRegistro(modifier: Modifier = Modifier) {
         Button(
             onClick = {
                 if (nombre.isBlank() || precio.isBlank() || cantidad.isBlank()) {
-                    mensajeError = "Error: Todos los campos son obligatorios"
+                    mensajeError = "Por favor, completa todos los campos requeridos."
                     mostrarResumen = false
                 } else {
                     mensajeError = ""
@@ -120,7 +120,10 @@ fun PantallaRegistro(modifier: Modifier = Modifier) {
                 mostrarResumen = false
                 mensajeError = ""
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            colors = androidx.compose.material3.ButtonDefaults.outlinedButtonColors(
+                contentColor = MaterialTheme.colorScheme.error
+            )
         ) {
             Text("LIMPIAR FORMULARIO")
         }
@@ -130,8 +133,10 @@ fun PantallaRegistro(modifier: Modifier = Modifier) {
         if (mensajeError.isNotEmpty()) {
             Text(
                 text = mensajeError,
-                color = Color.Red,
-                style = MaterialTheme.typography.bodyMedium
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(bottom = 8.dp)
             )
         }
 
