@@ -246,6 +246,13 @@ fun PantallaRegistroNotas() {
                 style = MaterialTheme.typography.bodyMedium
             )
         }
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Text(
+            text = "Desarrollado por: David Valcarcel",
+            style = MaterialTheme.typography.bodySmall,
+            color = Color.Gray
+        )
     }
 }
 @Composable
@@ -289,5 +296,12 @@ fun CursoSliderItem(
                 inactiveTrackColor = Color(0xFFD1C4E9)
             )
         )
+    }
+}
+@Preview(showBackground = true)
+@Composable
+fun RegistroNotasPreview() {
+    Lab03RegistroNotasTheme {
+        RegistroNotasApp()
     }
 }
