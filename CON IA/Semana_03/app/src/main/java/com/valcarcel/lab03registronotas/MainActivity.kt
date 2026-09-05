@@ -42,6 +42,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.valcarcel.lab03registronotas.ui.theme.Lab03RegistroNotasTheme
+import kotlin.math.roundToInt
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,6 +98,7 @@ fun PantallaRegistroNotas() {
 
     var redondear by remember { mutableStateOf(false) }
     var confirmado by remember { mutableStateOf(false) }
+    var mostrarResultado by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -167,11 +169,23 @@ fun PantallaRegistroNotas() {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text(
-            text = "Asigna las notas y confirma para calcular",
-            style = MaterialTheme.typography.bodyMedium,
-            color = Color.Gray
-        )
+        if (!mostrarResultado) {
+            Text(
+                text = "Asigna las notas y confirma para calcular",
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.Gray
+            )
+        } else {
+            val promPonderado = (notaFundamentos * 0.20f) + (notaPoo * 0.25f) + (notaMoviles * 0.30f) + (notaBd * 0.25f)
+            val promFinalDouble = if (redondear) promPonderado.roundToInt().toDouble() else promPonderado.toDouble()
+
+            val (observacion, colorChipTexto, colorChipFondo) = when {
+                promFinalDouble >= 17.0 -> Triple("EXCELENTE", Color(0xFF1B5E20), Color(0xFFE8F5E9))
+                promFinalDouble >= 13.0 -> Triple("APROBADO", Color(0xFF2E7D32), Color(0xFFE8F5E9))
+                promFinalDouble >= 10.0 -> Triple("EN RECUPERACIÓN", Color(0xFFE65100), Color(0xFFFFF3E0))
+                else -> Triple("DESAPROBADO", Color(0xFFC62828), Color(0xFFFFEBEE))
+            }
+        }
     }
 }
 @Composable
