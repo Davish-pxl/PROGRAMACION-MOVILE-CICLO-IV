@@ -26,7 +26,7 @@ fun HomeScreen(navController: NavController) {
                 title = {
                     Column {
                         Text("Clínica Salud+", fontWeight = FontWeight.Bold, color = Color.White)
-                        Text("Hola, Juan", fontSize = 14.sp, color = Color(0xFFE1BEE7))
+                        Text("Hola, David", fontSize = 14.sp, color = Color(0xFFE1BEE7))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFF512DA8))
