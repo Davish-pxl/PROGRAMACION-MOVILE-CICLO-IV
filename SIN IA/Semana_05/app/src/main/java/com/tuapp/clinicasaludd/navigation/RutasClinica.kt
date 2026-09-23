@@ -1,20 +1,18 @@
 package com.tuapp.clinicasaludd.navigation
 
 sealed class Screen(val route: String) {
-    object Dashboard : Screen("DashboardScreen")
-
-    object DetalleEspecialista : Screen("DetalleEspecialistaScreen/{medicoId}") {
-        fun createRoute(medicoId: Int) = "DetalleEspecialistaScreen/$medicoId"
+    object Dashboard : Screen("dashboard")
+    object DetalleEspecialista : Screen("detalle_especialista/{medicoId}") {
+        fun createRoute(medicoId: Int) = "detalle_especialista/$medicoId"
     }
-
-    object ReservarConsulta : Screen("ReservarConsultaScreen/{medicoId}") {
-        fun createRoute(medicoId: Int) = "ReservarConsultaScreen/$medicoId"
+    object ReservarConsulta : Screen("reservar_consulta/{medicoId}") {
+        fun createRoute(medicoId: Int) = "reservar_consulta/$medicoId"
     }
-
-    object ReservaExitosa : Screen("ReservaExitosaScreen/{doctorName}/{fecha}/{hora}") {
+    object ReservaExitosa : Screen("reserva_exitosa/{doctorName}/{fecha}/{hora}") {
         fun createRoute(doctorName: String, fecha: String, hora: String) =
-            "ReservaExitosaScreen/$doctorName/$fecha/$hora"
+            "reserva_exitosa/$doctorName/$fecha/$hora"
     }
-
-    object MisConsultas : Screen("MisConsultasScreen")
+    object MisConsultas : Screen("mis_consultas")
+    object HistorialMedico : Screen("historial_medico")
+    object Perfil : Screen("perfil")
 }
