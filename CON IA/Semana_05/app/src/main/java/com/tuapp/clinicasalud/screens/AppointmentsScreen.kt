@@ -49,7 +49,6 @@ fun AppointmentsScreen(navController: NavController) {
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // Cita confirmada
             item {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
