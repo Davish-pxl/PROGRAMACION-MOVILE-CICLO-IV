@@ -1,4 +1,4 @@
-package com.tuapp.navlab
+package com.tuapp.tecsupfit
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

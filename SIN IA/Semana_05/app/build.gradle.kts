@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.tuapp.navlab"
+    namespace = "com.tuapp.tecsupfit"
     compileSdk {
         version = release(37)
     }

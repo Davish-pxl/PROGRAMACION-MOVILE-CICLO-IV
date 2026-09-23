@@ -1,4 +1,4 @@
-package com.tuapp.navlab.ui.theme
+package com.tuapp.tecsupfit.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

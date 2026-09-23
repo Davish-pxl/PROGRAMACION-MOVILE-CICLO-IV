@@ -1,4 +1,4 @@
-package com.tuapp.navlab
+package com.tuapp.tecsupfit
 
 import org.junit.Test
 

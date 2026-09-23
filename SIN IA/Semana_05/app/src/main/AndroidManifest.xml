@@ -10,10 +10,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ClinicaSaludd">
+        android:theme="@android:style/Theme.Material.Light.NoActionBar">
 
         <activity
-            android:name="com.tuapp.clinicasaludd.MainActivity"
+            android:name="com.tuapp.tecsupfit.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize">
