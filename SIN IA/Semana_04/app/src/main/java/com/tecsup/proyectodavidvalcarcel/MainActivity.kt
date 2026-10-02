@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
             ProyectoDavidValcarcelTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Android",
+                        name = "Valcarcel David Geronimo",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
-        text = "Hello $name!",
+        text = "Nota del Alumno $name!",
         modifier = modifier
     )
 }

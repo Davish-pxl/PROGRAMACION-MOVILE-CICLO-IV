@@ -1,47 +1,30 @@
 package com.valcarcel.examen_correa
+ // Fernando Correa Huincho
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.valcarcel.examen_correa.ui.theme.Examen_CorreaTheme
+fun main() {
+    val precioTexto = "2400"
+    val cuotas = 12
+    val clienteFrecuente = true
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            Examen_CorreaTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
-        }
+    val precio = precioTexto.toDoubleOrNull() ?: 0.0
+    var tasaInteres = 0.0
+
+    when {
+        cuotas >= 24 -> tasaInteres = 0.18
+        cuotas >= 12 -> tasaInteres = 0.12
+        cuotas >= 6 -> tasaInteres = 0.08
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+    val descuento = if (clienteFrecuente || precio >= 2000) 0.10 else 0.0
+    val subtotal = precio * (1 - descuento)
+    val total = subtotal + (subtotal * tasaInteres)
+    println(total)
+    val cuotaMensual = total / cuotas
+    println(cuotaMensual)
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Examen_CorreaTheme {
-        Greeting("Android")
+    var saldo = total
+    for (n in 1..cuotas) {
+        saldo -= cuotaMensual
+        println("Cuota $n: S/ $cuotaMensual - Saldo: S/ $saldo")
     }
 }
