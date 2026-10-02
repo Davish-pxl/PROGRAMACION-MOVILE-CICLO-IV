@@ -2,10 +2,6 @@ package com.tecsup.tecsupstore.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-package com.tecsup.tecsupstore.screens
-
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -129,21 +125,22 @@ fun CardProductoItem(producto: Productos, navController: NavController) {
                     )
                 }
 
-                // DropdownMenu basico
                 DropdownMenu(
                     expanded = menuDesplegado,
                     onDismissRequest = { menuDesplegado = false }
                 ) {
                     DropdownMenuItem(
-                        text = { Text("Favoritos") },
+                        text = { Text("♥ Favoritos") },
                         onClick = { menuDesplegado = false }
                     )
+                    HorizontalDivider()
                     DropdownMenuItem(
-                        text = { Text("Compartir") },
+                        text = { Text("↗ Compartir") },
                         onClick = { menuDesplegado = false }
                     )
+                    HorizontalDivider()
                     DropdownMenuItem(
-                        text = { Text("Reportar") },
+                        text = { Text("⚠ Reportar") },
                         onClick = { menuDesplegado = false }
                     )
                 }
