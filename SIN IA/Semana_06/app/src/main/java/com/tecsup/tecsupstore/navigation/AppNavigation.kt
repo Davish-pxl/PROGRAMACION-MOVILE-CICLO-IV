@@ -46,7 +46,7 @@ fun AppNavigation() {
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "MR",
+                            text = "DV",
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
@@ -54,12 +54,12 @@ fun AppNavigation() {
                     Spacer(modifier = Modifier.width(16.dp))
                     Column {
                         Text(
-                            text = "Maria Rojas",
+                            text = "David Valcarcel",
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold
                         )
                         Text(
-                            text = "maria@tecsup.edu.pe",
+                            text = "david@tecsup.edu.pe",
                             style = MaterialTheme.typography.bodySmall,
                             color = Color.Gray
                         )
