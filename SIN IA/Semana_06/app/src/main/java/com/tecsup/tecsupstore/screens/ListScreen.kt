@@ -2,6 +2,10 @@ package com.tecsup.tecsupstore.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+package com.tecsup.tecsupstore.screens
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -24,7 +28,6 @@ import com.tecsup.tecsupstore.navigation.Screen
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListScreen(navController: NavController) {
-    // Datos exactos del prototipo
     val productos = listOf(
         Productos(1, "Audifonos", "Audio", 89.00, "TEC-001", 10, 4.8, "Audífonos inalámbricos"),
         Productos(2, "Smartwatch", "Tecnología", 199.00, "TEC-002", 25, 4.5, "Reloj inteligente"),
@@ -49,7 +52,7 @@ fun ListScreen(navController: NavController) {
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF4A148C), // Morado institucional exacto
+                    containerColor = Color(0xFF4A148C),
                     titleContentColor = Color.White
                 )
             )
@@ -88,7 +91,6 @@ fun CardProductoItem(producto: Productos, navController: NavController) {
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Cuadro del ícono morado
             Box(
                 modifier = Modifier
                     .size(48.dp)
@@ -105,7 +107,6 @@ fun CardProductoItem(producto: Productos, navController: NavController) {
 
             Spacer(modifier = Modifier.width(16.dp))
 
-            // Nombre y Precio
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = producto.nombre,
@@ -120,7 +121,6 @@ fun CardProductoItem(producto: Productos, navController: NavController) {
                 )
             }
 
-            // Menú contextual de los 3 puntos
             Box {
                 IconButton(onClick = { menuDesplegado = true }) {
                     Icon(
@@ -129,22 +129,21 @@ fun CardProductoItem(producto: Productos, navController: NavController) {
                     )
                 }
 
+                // DropdownMenu basico
                 DropdownMenu(
                     expanded = menuDesplegado,
                     onDismissRequest = { menuDesplegado = false }
                 ) {
                     DropdownMenuItem(
-                        text = { Text("♥ Favoritos") },
+                        text = { Text("Favoritos") },
                         onClick = { menuDesplegado = false }
                     )
-                    HorizontalDivider()
                     DropdownMenuItem(
-                        text = { Text("↗ Compartir") },
+                        text = { Text("Compartir") },
                         onClick = { menuDesplegado = false }
                     )
-                    HorizontalDivider()
                     DropdownMenuItem(
-                        text = { Text("⚠ Reportar") },
+                        text = { Text("Reportar") },
                         onClick = { menuDesplegado = false }
                     )
                 }
